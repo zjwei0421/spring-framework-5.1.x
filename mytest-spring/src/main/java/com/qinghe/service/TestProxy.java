@@ -7,6 +7,7 @@ package com.qinghe.service;
 
 import com.qinghe.dao.UserDao;
 import com.qinghe.dao.UserDaoImpl;
+import com.qinghe.proxy.ProxyUtils;
 import com.qinghe.proxy.UserDaoLogProxy;
 
 /**
@@ -18,8 +19,14 @@ import com.qinghe.proxy.UserDaoLogProxy;
  */
 public class TestProxy {
 	public static void main(String[] args) {
+//		UserDao userDao = new UserDaoImpl();
+//		UserDaoLogProxy proxy = new UserDaoLogProxy(userDao);
+//		proxy.query();
+//		Class clazz = UserDaoImpl.class.getDeclaredMethods()[0].getReturnType();
+//		System.out.println(clazz.getSimpleName());
 		UserDao userDao = new UserDaoImpl();
-		UserDaoLogProxy proxy = new UserDaoLogProxy(userDao);
+		UserDao proxy = (UserDao) ProxyUtils.newInstance(userDao);
 		proxy.query();
+		System.out.println(proxy.query("Hello world"));
 	}
 }

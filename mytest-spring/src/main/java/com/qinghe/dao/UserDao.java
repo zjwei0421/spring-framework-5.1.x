@@ -16,4 +16,6 @@ package com.qinghe.dao;
 public interface UserDao {
 
 	void query();
+
+	String query(String s);
 }

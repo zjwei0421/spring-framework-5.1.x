@@ -21,4 +21,9 @@ public class UserDaoImpl implements UserDao {
 	public void query() {
 		System.out.println("query");
 	}
+
+	@Override
+	public String query(String s) {
+		return s;
+	}
 }

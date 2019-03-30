@@ -30,4 +30,9 @@ public class UserDaoLogProxy implements UserDao {
 		System.out.println("-------logging-------");
 		target.query();
 	}
+
+	@Override
+	public String query(String s) {
+		return null;
+	}
 }

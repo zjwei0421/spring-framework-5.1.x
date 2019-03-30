@@ -16,7 +16,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 
 /**
- * <p>  </p> 
+ * <p> 模拟JDK动态代理 </p>
  *
  * @author 清禾 (zjwei0421@163.com)
  * @date 2019/3/31 1:09 AM
@@ -32,6 +32,7 @@ public class ProxyUtils {
 		String tab = "\t";
 		//接口
 		Class interfaceName = target.getClass().getInterfaces()[0];
+		//接口方法
 		Method[] methods = interfaceName.getDeclaredMethods();
 		String methodContent = "";
 		//组装方法

@@ -157,9 +157,9 @@ task schemaZip(type: Zip) {
 			File xsdFile = subproject.sourceSets.main.resources.find {
 				it.path.endsWith(schemas.get(key))
 			}
-			assert xsdFile != null
+//			assert xsdFile != null
 			into (shortName) {
-				from xsdFile.path
+//				from xsdFile.path
 			}
 		}
 	}

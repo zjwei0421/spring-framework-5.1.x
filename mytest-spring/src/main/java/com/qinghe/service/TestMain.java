@@ -8,6 +8,7 @@ package com.qinghe.service;
 
 import com.qinghe.config.AppConfig;
 import com.qinghe.dao.UserDao;
+import com.qinghe.proxy.UserDaoLogProxy;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**

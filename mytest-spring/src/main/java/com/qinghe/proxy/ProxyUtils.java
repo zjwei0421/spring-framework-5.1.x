@@ -97,7 +97,6 @@ public class ProxyUtils {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-
 		return null;
 	}
 }

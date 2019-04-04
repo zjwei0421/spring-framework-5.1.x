@@ -1010,6 +1010,9 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 
 	@Override
 	public boolean isFactoryBean(String name) throws NoSuchBeanDefinitionException {
+		/**
+		 * 将别名的beanName转换为真正的beanName，并且将beanName上的&符号去掉
+		 */
 		String beanName = transformedBeanName(name);
 		Object beanInstance = getSingleton(beanName, false);
 		if (beanInstance != null) {

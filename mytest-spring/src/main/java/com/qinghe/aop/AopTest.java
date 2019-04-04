@@ -17,7 +17,6 @@ import org.springframework.stereotype.Component;
  * @date 2019/3/31 12:35 AM
  * @since V1.0
  */
-@Component
 @Aspect
 public class AopTest {
 

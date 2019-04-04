@@ -6,6 +6,8 @@
  */
 package com.qinghe.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -17,6 +19,10 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class UserDaoImpl implements UserDao {
+
+	@Autowired
+	private IndexService indexService;
+
 	@Override
 	public void query() {
 		System.out.println("query");

@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
  * @date 2019/3/31 12:47 AM
  * @since V1.0
  */
-@Component
 public class UserDaoLogProxy implements UserDao {
 
 	private UserDao target;

@@ -66,6 +66,9 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 		 * 这个reader是一个BeanDefinition(用于描述bean)的读取器
 		 */
 		this.reader = new AnnotatedBeanDefinitionReader(this);
+		/**
+		 * 能够扫描一个类/包 并且装换成BeanDefinition
+		 */
 		this.scanner = new ClassPathBeanDefinitionScanner(this);
 	}
 

@@ -173,6 +173,10 @@ public abstract class AnnotationConfigUtils {
 		}
 
 		if (!registry.containsBeanDefinition(AUTOWIRED_ANNOTATION_PROCESSOR_BEAN_NAME)) {
+			/**
+			 * RootBeanDefinition用来描述Spring内部的类
+			 * ######这里是怎么把AutowiredAnnotationBeanPostProcessor解析成BeanDefinition?
+			 */
 			RootBeanDefinition def = new RootBeanDefinition(AutowiredAnnotationBeanPostProcessor.class);
 			def.setSource(source);
 			beanDefs.add(registerPostProcessor(registry, def, AUTOWIRED_ANNOTATION_PROCESSOR_BEAN_NAME));

@@ -9,6 +9,7 @@ package com.qinghe.service;
 import com.qinghe.config.AppConfig;
 import com.qinghe.dao.UserDao;
 import com.qinghe.dao.UserDaoImpl;
+import com.qinghe.myimports.Dao;
 import com.qinghe.proxy.UserDaoLogProxy;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -26,9 +27,9 @@ public class TestMain {
 		//把Spring所有的前提准备好
 		AnnotationConfigApplicationContext context
 				= new AnnotationConfigApplicationContext(AppConfig.class);
-		context.register(AppConfig.class);
-		context.refresh();
-		UserDao userDao = (UserDao) context.getBean(UserDao.class);
+//		context.register(AppConfig.class);
+//		context.refresh();
+		Dao userDao = (Dao) context.getBean("indexDao");
 		userDao.query();
 	}
 }

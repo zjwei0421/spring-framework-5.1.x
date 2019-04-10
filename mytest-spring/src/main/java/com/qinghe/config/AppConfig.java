@@ -7,9 +7,11 @@
 package com.qinghe.config;
 
 
+import com.qinghe.myimports.MyImportSelector;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.Import;
 
 /**
  * <p>  </p> 
@@ -20,6 +22,6 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  */
 @Configuration
 @ComponentScan("com.qinghe")
-@EnableAspectJAutoProxy
+@Import(MyImportSelector.class)
 public class AppConfig {
 }

@@ -17,7 +17,6 @@ import org.springframework.stereotype.Repository;
  * @date 2019/3/31 12:32 AM
  * @since V1.0
  */
-@Repository
 public class UserDaoImpl implements UserDao {
 
 	@Autowired

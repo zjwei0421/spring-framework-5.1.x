@@ -1,34 +1,28 @@
 /**
  * Allrights Reserved,Designed By www.maihaoche.com
  *
- * @Package com.qinghe.dao
+ * @Package com.qinghe.myimports
  * @author 清禾 (qinghe@maihaoche.com)
- * @date 2019/4/3 9:40 PM
+ * @date 2019/4/10 2:44 PM
  * @Copyright 2017-2018 www.maihaoche.comInc.Allrightsreserved.
  * 注意: 本内容仅限于卖好车内部传阅，禁止外泄以及用于其他的商业项目
  */
-package com.qinghe.dao;
+package com.qinghe.myimports;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
  * <p>  </p> 
  *
  * @author 清禾 (qinghe@maihaoche.com)
- * @date 2019/4/3 9:40 PM
+ * @date 2019/4/10 2:44 PM
  * @since V1.0
  */
-public class IndexServiceImpl implements IndexService {
-
-	@Autowired
-	private UserDao userDao;
-
-	private FacadeTest facadeTest;
+@Component
+public class IndexDao implements Dao {
 
 	@Override
 	public void query() {
-
+		System.out.println("query");
 	}
 }

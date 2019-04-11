@@ -295,6 +295,10 @@ final class PostProcessorRegistrationDelegate {
 			Collection<? extends BeanFactoryPostProcessor> postProcessors, ConfigurableListableBeanFactory beanFactory) {
 
 		for (BeanFactoryPostProcessor postProcessor : postProcessors) {
+			/**
+			 * 这里主要执行ConfigurationClassPostProcessor类的postProcessBeanFactory方法，
+			 * 因为Spring初始化时就这一个BeanDefinitionRegistryPostProcessor
+			 */
 			postProcessor.postProcessBeanFactory(beanFactory);
 		}
 	}

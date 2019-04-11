@@ -276,6 +276,9 @@ class ConfigurationClassParser {
 			}
 		}
 
+		/**
+		 * 扫描普通类并注册到bd-map中
+		 */
 		// Process any @ComponentScan annotations
 		Set<AnnotationAttributes> componentScans = AnnotationConfigUtils.attributesForRepeatable(
 				sourceClass.getMetadata(), ComponentScans.class, ComponentScan.class);
@@ -298,6 +301,16 @@ class ConfigurationClassParser {
 			}
 		}
 
+		/**
+		 * 这里处理的import是需要通过getImports(sourceClass)判断我们的类中是否有@Import注解
+		 * 如果有则把@Import当中的值拿出来，是一个类
+		 * 比如@Import(XXX.class),那么便把XXX传进去进行解析
+		 * 在解析过程中如果发觉是一个ImportSelector那们就会去回调selectImports的方法，
+		 * 返回一个字符串数组，通过这个字符串数组得到一些类
+		 * 继而递归调用本方法来处理这个类
+		 *
+		 * 为什么要单独写这么多注释
+		 */
 		// Process any @Import annotations
 		processImports(configClass, sourceClass, getImports(sourceClass), true);
 
@@ -557,6 +570,7 @@ class ConfigurationClassParser {
 				for (SourceClass candidate : importCandidates) {
 					if (candidate.isAssignable(ImportSelector.class)) {
 						// Candidate class is an ImportSelector -> delegate to it to determine imports
+						//通过反射获取ImportSelector对象
 						Class<?> candidateClass = candidate.loadClass();
 						ImportSelector selector = BeanUtils.instantiateClass(candidateClass, ImportSelector.class);
 						ParserStrategyUtils.invokeAwareMethods(

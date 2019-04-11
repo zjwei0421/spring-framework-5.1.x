@@ -7,6 +7,7 @@
 package com.qinghe.config;
 
 
+import com.qinghe.myimports.EnableAop;
 import com.qinghe.myimports.MyImportSelector;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +23,7 @@ import org.springframework.context.annotation.Import;
  */
 @Configuration
 @ComponentScan("com.qinghe")
-@Import(MyImportSelector.class)
+@EnableAop
+@EnableAspectJAutoProxy
 public class AppConfig {
 }

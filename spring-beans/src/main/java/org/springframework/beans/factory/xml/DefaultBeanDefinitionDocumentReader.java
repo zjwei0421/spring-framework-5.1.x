@@ -125,10 +125,19 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 		// the new (child) delegate with a reference to the parent for fallback purposes,
 		// then ultimately reset this.delegate back to its original (parent) reference.
 		// this behavior emulates a stack of delegates without actually necessitating one.
+		/**
+		 * 这里BeanDefinitionParserDelegate是一个很重要的类。它负责解析Bean定义，
+		 * 这里为什么要定义一个parent呢？是递归问题，因为<bean />内部是可以定义<bean/>的，所以这个方法的root其实不一定就是xml的根节点，
+		 * 也可以是嵌套在里面的<bean/>节点，从源码分析的角度，我们当作根节点就好了
+		 */
 		BeanDefinitionParserDelegate parent = this.delegate;
 		this.delegate = createDelegate(getReaderContext(), root, parent);
 
 		if (this.delegate.isDefaultNamespace(root)) {
+			/**
+			 * 这块说的是根节点 <beans ... profile="dev" /> 中的 profile 是否是当前环境需要的，
+			 * 如果当前环境配置的 profile 不包含此 profile，那就直接 return 了，不对此 <beans /> 解析
+ 			 */
 			String profileSpec = root.getAttribute(PROFILE_ATTRIBUTE);
 			if (StringUtils.hasText(profileSpec)) {
 				String[] specifiedProfiles = StringUtils.tokenizeToStringArray(
@@ -165,6 +174,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 	 * "import", "alias", "bean".
 	 * @param root the DOM root element of the document
 	 */
+	//default namespace 涉及到的就四个标签 <import />、<alias />、<bean /> 和 <beans />；其他的属于 custom 的
 	protected void parseBeanDefinitions(Element root, BeanDefinitionParserDelegate delegate) {
 		if (delegate.isDefaultNamespace(root)) {
 			NodeList nl = root.getChildNodes();

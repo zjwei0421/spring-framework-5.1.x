@@ -122,14 +122,28 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 	 */
 	@Override
 	protected final void refreshBeanFactory() throws BeansException {
+		/**
+		 * 如果ApplicationContext中已经加载过BeanFactory了，销毁所有Bean，关闭BeanFactory
+		 * 注意：应用中BeanFactory本来就是可以多个的，这里可不是说应用全局是否有BeanFactory，
+		 * 而是当前ApplicationContext是否有BeanFactory
+		 */
 		if (hasBeanFactory()) {
 			destroyBeans();
 			closeBeanFactory();
 		}
 		try {
+			/**
+			 * 初始化一个DefaultListableBeanFactory
+			 */
 			DefaultListableBeanFactory beanFactory = createBeanFactory();
 			beanFactory.setSerializationId(getId());
+			/**
+			 * 设置BeanFactory的两个属性：是否允许Bean覆盖；是否允许循环引用
+			 */
 			customizeBeanFactory(beanFactory);
+			/**
+			 * 加载Bean到BeanFactory中
+			 */
 			loadBeanDefinitions(beanFactory);
 			synchronized (this.beanFactoryMonitor) {
 				this.beanFactory = beanFactory;
@@ -223,9 +237,17 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 	 */
 	protected void customizeBeanFactory(DefaultListableBeanFactory beanFactory) {
 		if (this.allowBeanDefinitionOverriding != null) {
+			/**
+			 * 是否允许Bean定义进行覆盖：就是在配置文件中定义 bean 时使用了相同的 id 或 name；
+			 * 默认情况下，allowBeanDefinitionOverriding 属性为 null，如果在同一配置文件中重复了，会抛错，但是如果不是同一配置文件中，会发生覆盖
+			 */
 			beanFactory.setAllowBeanDefinitionOverriding(this.allowBeanDefinitionOverriding);
 		}
 		if (this.allowCircularReferences != null) {
+			/**
+			 * 是否允许Bean间的循环依赖：A 依赖 B，而 B 依赖 A。或 A 依赖 B，B 依赖 C，而 C 依赖 A；
+			 * 默认情况下，Spring 允许循环依赖，当然如果你在 A 的构造方法中依赖 B，在 B 的构造方法中依赖 A 是不行的
+			 */
 			beanFactory.setAllowCircularReferences(this.allowCircularReferences);
 		}
 	}

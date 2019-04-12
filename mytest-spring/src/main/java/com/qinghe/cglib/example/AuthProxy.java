@@ -39,7 +39,7 @@ public class AuthProxy implements MethodInterceptor {
 			System.out.println("AuthProxy:you have no permits to do manager!");
 			return null;
 		}
-		return proxy.invokeSuper(obj, args);
+		return method.invoke(obj, args);
 	}
 
 	public String getName() {

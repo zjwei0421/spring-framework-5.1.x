@@ -514,6 +514,9 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	//准备好bean工厂，实例化对象
 	@Override
 	public void refresh() throws BeansException, IllegalStateException {
+		/**
+		 * 加个锁，防止refresh还没结束，又来一次
+		 */
 		synchronized (this.startupShutdownMonitor) {
 			/**
 			 * 准备工作：设置启动时间，是否激活标识位，初始化属性源
@@ -524,20 +527,21 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 			/**
 			 * 获取DefaultListableBeanFactory,该对象会在
 			 * org.springframework.context.annotation.AnnotationConfigApplicationContext#AnnotationConfigApplicationContext(java.lang.Class[])
-			 * 方法的register注册的
+			 * 方法的register注册的；
+			 * 另外，xml配置的bean是在这里初始化的
 			 */
 			// Tell the subclass to refresh the internal bean factory.
 			ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
 
 			/**
-			 * 准备工厂
+			 * 准备工厂；设置BeanFactory的类加载器，添加几个BeanPostProcessor，手动注册几个特殊的spring内部的bean
 			 */
 			// Prepare the bean factory for use in this context.
 			prepareBeanFactory(beanFactory);
 
 			try {
 				/**
-				 * 目前没有实现
+				 * 目前没有实现;
 				 */
 				// Allows post-processing of the bean factory in context subclasses.
 				postProcessBeanFactory(beanFactory);
@@ -619,6 +623,9 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 		// Validate that all properties marked as required are resolvable:
 		// see ConfigurablePropertyResolver#setRequiredProperties
+		/**
+		 * 校验xml配置文件
+		 */
 		getEnvironment().validateRequiredProperties();
 
 		// Store pre-refresh ApplicationListeners...
@@ -652,6 +659,10 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * @see #getBeanFactory()
 	 */
 	protected ConfigurableListableBeanFactory obtainFreshBeanFactory() {
+		/**
+		 * 关闭旧的BeanFactory(如果有)，创建信的BeanFactory，加载Bean定义、注册Bean等等
+		 * 调用org.springframework.context.support.AbstractRefreshableApplicationContext#refreshBeanFactory()
+		 */
 		refreshBeanFactory();
 		return getBeanFactory();
 	}

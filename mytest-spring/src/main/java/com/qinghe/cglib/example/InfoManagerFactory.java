@@ -41,8 +41,8 @@ public class InfoManagerFactory {
 	public static InfoManager getAuthInstance(AuthProxy authProxy) {
 		Enhancer enhancer = new Enhancer();
 		enhancer.setSuperclass(InfoManager.class);
-		enhancer.setCallbacks(new Callback[]{authProxy, new LogProxy(), NoOp.INSTANCE});
-		enhancer.setCallbackTypes(new Class[]{AuthProxy.class, LogProxy.class, NoOp.INSTANCE.getClass()});
+		enhancer.setCallbacks(new Callback[]{authProxy, NoOp.INSTANCE});
+//		enhancer.setCallbackTypes(new Class[]{AuthProxy.class, LogProxy.class, NoOp.INSTANCE.getClass()});
 		enhancer.setCallbackFilter(new AuthProxyFilter());
 		return (InfoManager) enhancer.create();
 	}

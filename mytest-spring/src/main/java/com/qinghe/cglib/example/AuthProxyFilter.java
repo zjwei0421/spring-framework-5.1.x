@@ -22,7 +22,7 @@ import java.lang.reflect.Method;
  */
 public class AuthProxyFilter implements CallbackFilter {
 
-	private static final int AUTH_NEED     = 1;
+	private static final int AUTH_NEED     = 0;
 	private static final int AUTH_NOT_NEED = 2;
 
 	/**
@@ -32,9 +32,9 @@ public class AuthProxyFilter implements CallbackFilter {
 	 */
 	@Override
 	public int accept(Method method) {
-		if ("query".equals(method.getName())) {
-			return AUTH_NOT_NEED;
-		}
+//		if ("query".equals(method.getName())) {
+//			return AUTH_NOT_NEED;
+//		}
 		return AUTH_NEED;
 	}
 }

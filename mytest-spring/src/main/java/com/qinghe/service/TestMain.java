@@ -28,10 +28,6 @@ public class TestMain {
 		//把Spring所有的前提准备好
 		AnnotationConfigApplicationContext context
 				= new AnnotationConfigApplicationContext(AppConfig.class);
-//		context.register(AppConfig.class);
-//		context.refresh();
-//		Dao userDao = (Dao) context.getBean("indexDao");
-//		userDao.query();
 		IndexService indexService = context.getBean(IndexService.class);
 
 	}

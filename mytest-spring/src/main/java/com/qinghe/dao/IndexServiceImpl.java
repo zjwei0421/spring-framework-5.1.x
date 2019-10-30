@@ -26,7 +26,6 @@ public class IndexServiceImpl implements IndexService {
 	@Autowired
 	private UserDao userDao;
 
-	private FacadeTest facadeTest;
 
 	@Override
 	public void query() {

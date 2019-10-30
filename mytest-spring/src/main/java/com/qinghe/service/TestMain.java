@@ -7,6 +7,7 @@
 package com.qinghe.service;
 
 import com.qinghe.config.AppConfig;
+import com.qinghe.dao.IndexService;
 import com.qinghe.dao.UserDao;
 import com.qinghe.dao.UserDaoImpl;
 import com.qinghe.myimports.Dao;
@@ -29,7 +30,9 @@ public class TestMain {
 				= new AnnotationConfigApplicationContext(AppConfig.class);
 //		context.register(AppConfig.class);
 //		context.refresh();
-		Dao userDao = (Dao) context.getBean("indexDao");
-		userDao.query();
+//		Dao userDao = (Dao) context.getBean("indexDao");
+//		userDao.query();
+		IndexService indexService = context.getBean(IndexService.class);
+
 	}
 }
